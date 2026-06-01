@@ -3,5 +3,15 @@
   "name": "site-shalu-website-mph1ikpi",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "src/server.ts",
+  // Built by `vite build` via @lovable.dev/vite-tanstack-config (TanStack
+  // Start SSR + cloudflare-vite-plugin). The vite plugin should redirect
+  // wrangler via .wrangler/deploy/config.json, but with the current
+  // @cloudflare/vite-plugin behaviour in this repo, the redirect isn't
+  // emitted — point wrangler at the built artifact directly. The .open-next
+  // analog used by Next.js sites.
+  "main": "dist/server/server.js",
+  "assets": {
+    "directory": "dist/client",
+    "binding": "ASSETS"
+  }
 }
