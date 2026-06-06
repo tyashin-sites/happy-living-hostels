@@ -10,6 +10,24 @@ import {
 
 import appCss from "../styles.css?url";
 
+// PERF: self-hosted fonts via @fontsource (bundled woff2, font-display:swap)
+// replace the render-blocking Google Fonts <link> that used to sit in this
+// route's `head`. Same families/weights as before:
+//   Playfair Display 400/600/700/800/900 (+ italic 400/600) -> --font-display
+//   Inter 400/500/600/700                                    -> --font-sans
+// Only the `latin` subset is imported to keep the bundle lean.
+import "@fontsource/playfair-display/latin-400.css";
+import "@fontsource/playfair-display/latin-600.css";
+import "@fontsource/playfair-display/latin-700.css";
+import "@fontsource/playfair-display/latin-800.css";
+import "@fontsource/playfair-display/latin-900.css";
+import "@fontsource/playfair-display/latin-400-italic.css";
+import "@fontsource/playfair-display/latin-600-italic.css";
+import "@fontsource/inter/latin-400.css";
+import "@fontsource/inter/latin-500.css";
+import "@fontsource/inter/latin-600.css";
+import "@fontsource/inter/latin-700.css";
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -81,15 +99,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
     ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap",
-      },
-    ],
+    // Fonts are self-hosted via @fontsource (imported at the top of this file),
+    // so there is NO render-blocking Google Fonts <link> here anymore.
+    // Only the app stylesheet is linked.
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -98,12 +111,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
+  // PERF: inline the base theme background on <html>/<body> so the cream paints
+  // on the very first frame (no white-flash filmstrip frames that inflate the
+  // mobile Speed Index). #F8F4E1 is the resolved sRGB value of the design
+  // token --background = oklch(0.965 0.025 95). overflow-x-clip on <body>
+  // prevents the decorative blur blobs from causing horizontal scroll.
+  // NOTE: no <link href="/brand-kit.css"> here — the Tyashin dispatch layer
+  // inlines the brand kit as a <style> when the link is absent.
   return (
-    <html lang="en">
+    <html lang="en" style={{ backgroundColor: "#F8F4E1" }}>
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="overflow-x-clip" style={{ backgroundColor: "#F8F4E1" }}>
         {children}
         <Scripts />
       </body>
