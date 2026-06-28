@@ -185,7 +185,7 @@ async function fetchPublicJson<T>(base: string, key: string, path: string): Prom
  * empty/inactive list so the route renders notFound rather than a 500.
  */
 export const listPosts = createServerFn({ method: "GET" })
-  .inputValidator((data: { page?: number } | undefined) => ({
+  .validator((data: { page?: number } | undefined) => ({
     page: data?.page && data.page > 0 ? Math.floor(data.page) : 1,
   }))
   .handler(async ({ data }): Promise<BlogListResponse> => {
@@ -213,7 +213,7 @@ export const listPosts = createServerFn({ method: "GET" })
  * (route renders notFound) on miss, empty data, or any fetch/parse error.
  */
 export const getPost = createServerFn({ method: "GET" })
-  .inputValidator((data: { slug: string }) => ({ slug: String(data.slug) }))
+  .validator((data: { slug: string }) => ({ slug: String(data.slug) }))
   .handler(async ({ data }): Promise<BlogPostFull | null> => {
     try {
       const { key, base } = await resolveEnv();
