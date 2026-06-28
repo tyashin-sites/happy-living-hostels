@@ -23,19 +23,19 @@ export function SiteHeader() {
         </a>
 
         <nav className="hidden items-center gap-8 text-sm font-medium text-foreground/80 md:flex">
-          <a href="#facilities" className="hover:text-forest">
+          <a href="/#facilities" className="hover:text-forest">
             Facilities
           </a>
-          <a href="#gallery" className="hover:text-forest">
+          <a href="/#gallery" className="hover:text-forest">
             Gallery
           </a>
-          <a href="#about" className="hover:text-forest">
+          <a href="/#about" className="hover:text-forest">
             About
           </a>
-          <a href="#location" className="hover:text-forest">
+          <a href="/#location" className="hover:text-forest">
             Location
           </a>
-          <a href="#contact" className="hover:text-forest">
+          <a href="/#contact" className="hover:text-forest">
             Contact
           </a>
           {blogHasPosts && (
