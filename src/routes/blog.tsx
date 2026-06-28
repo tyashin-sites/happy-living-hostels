@@ -75,6 +75,7 @@ function BlogIndex() {
                 key={post.slug}
                 to="/blog/$slug"
                 params={{ slug: post.slug }}
+                reloadDocument
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-soft transition hover:-translate-y-1 hover:shadow-elevated"
               >
                 <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
@@ -128,6 +129,7 @@ function BlogIndex() {
                 <Link
                   to="/blog"
                   search={{ page: page - 1 }}
+                  reloadDocument
                   className="inline-flex items-center gap-2 rounded-full border border-forest/20 bg-card px-5 py-2.5 text-sm font-semibold text-forest transition hover:bg-secondary"
                 >
                   ← Newer
@@ -144,6 +146,7 @@ function BlogIndex() {
                 <Link
                   to="/blog"
                   search={{ page: page + 1 }}
+                  reloadDocument
                   className="inline-flex items-center gap-2 rounded-full border border-forest/20 bg-card px-5 py-2.5 text-sm font-semibold text-forest transition hover:bg-secondary"
                 >
                   Older →

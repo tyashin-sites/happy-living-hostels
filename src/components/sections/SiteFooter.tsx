@@ -66,6 +66,7 @@ export function SiteFooter() {
           {blogHasPosts && (
             <Link
               to="/blog"
+              reloadDocument
               className="mt-2 flex items-center gap-2 text-sm text-cream/80 hover:text-cream"
             >
               <BookOpen className="h-4 w-4" />

@@ -77,6 +77,7 @@ function BlogPost() {
         <article className="mx-auto max-w-3xl px-5 pb-20 pt-12 md:pt-16">
           <Link
             to="/blog"
+            reloadDocument
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-leaf transition hover:text-forest"
           >
             ← All articles
@@ -123,6 +124,7 @@ function BlogPost() {
 
           <Link
             to="/blog"
+            reloadDocument
             className="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-leaf transition hover:text-forest"
           >
             ← Back to all articles

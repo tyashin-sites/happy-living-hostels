@@ -39,7 +39,7 @@ export function SiteHeader() {
             Contact
           </a>
           {blogHasPosts && (
-            <Link to="/blog" className="hover:text-forest">
+            <Link to="/blog" reloadDocument className="hover:text-forest">
               Blog
             </Link>
           )}
