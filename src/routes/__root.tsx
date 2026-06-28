@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { fetchBlogMeta } from "@/lib/blog";
 
 // PERF: self-hosted fonts via @fontsource (bundled woff2, font-display:swap)
 // replace the render-blocking Google Fonts <link> that used to sit in this
@@ -86,6 +87,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  // SSR-fetch blog availability once at the root so SiteHeader/SiteFooter can
+  // gate the "Blog" nav link on whether any posts exist. Exposed via loader
+  // data and read with `useRouteContext`-style access below.
+  loader: async () => {
+    const meta = await fetchBlogMeta();
+    return { blogHasPosts: meta.active && meta.hasPosts };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },

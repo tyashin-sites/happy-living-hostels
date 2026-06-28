@@ -1,7 +1,10 @@
-import { Leaf, MapPin, Phone } from "lucide-react";
+import { Leaf, MapPin, Phone, BookOpen } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { siteConfig, whatsappLink } from "@/config/site";
+import { useBlogHasPosts } from "@/lib/blog";
 
 export function SiteFooter() {
+  const blogHasPosts = useBlogHasPosts();
   return (
     <footer className="border-t border-forest/15 bg-forest text-cream">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-3">
@@ -18,15 +21,12 @@ export function SiteFooter() {
             </div>
           </div>
           <p className="mt-4 max-w-xs text-sm text-cream/70">
-            A homely premium girls PG offering comfort, safety and care in
-            Roop Nagar, Delhi.
+            A homely premium girls PG offering comfort, safety and care in Roop Nagar, Delhi.
           </p>
         </div>
 
         <div>
-          <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
-            Visit
-          </h3>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Visit</h3>
           <p className="mt-4 flex items-start gap-2 text-sm text-cream/80">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
             <span>
@@ -46,9 +46,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
-            Connect
-          </h3>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Connect</h3>
           <a
             href={whatsappLink}
             target="_blank"
@@ -65,13 +63,26 @@ export function SiteFooter() {
             <Phone className="h-4 w-4" />
             Call · {siteConfig.whatsappDisplay}
           </a>
+          {blogHasPosts && (
+            <Link
+              to="/blog"
+              className="mt-2 flex items-center gap-2 text-sm text-cream/80 hover:text-cream"
+            >
+              <BookOpen className="h-4 w-4" />
+              Read our Blog
+            </Link>
+          )}
         </div>
       </div>
 
       <div className="border-t border-cream/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-5 text-xs text-cream/60 sm:flex-row">
-          <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-          <p>{siteConfig.meta.audience} · {siteConfig.promise}</p>
+          <p>
+            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+          </p>
+          <p>
+            {siteConfig.meta.audience} · {siteConfig.promise}
+          </p>
         </div>
       </div>
     </footer>

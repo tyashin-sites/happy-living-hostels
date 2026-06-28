@@ -1,7 +1,10 @@
 import { Leaf } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { siteConfig, whatsappLink } from "@/config/site";
+import { useBlogHasPosts } from "@/lib/blog";
 
 export function SiteHeader() {
+  const blogHasPosts = useBlogHasPosts();
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
@@ -20,11 +23,26 @@ export function SiteHeader() {
         </a>
 
         <nav className="hidden items-center gap-8 text-sm font-medium text-foreground/80 md:flex">
-          <a href="#facilities" className="hover:text-forest">Facilities</a>
-          <a href="#gallery" className="hover:text-forest">Gallery</a>
-          <a href="#about" className="hover:text-forest">About</a>
-          <a href="#location" className="hover:text-forest">Location</a>
-          <a href="#contact" className="hover:text-forest">Contact</a>
+          <a href="#facilities" className="hover:text-forest">
+            Facilities
+          </a>
+          <a href="#gallery" className="hover:text-forest">
+            Gallery
+          </a>
+          <a href="#about" className="hover:text-forest">
+            About
+          </a>
+          <a href="#location" className="hover:text-forest">
+            Location
+          </a>
+          <a href="#contact" className="hover:text-forest">
+            Contact
+          </a>
+          {blogHasPosts && (
+            <Link to="/blog" className="hover:text-forest">
+              Blog
+            </Link>
+          )}
         </nav>
 
         <a
