@@ -3,11 +3,11 @@ import { SiteHeader } from "@/components/sections/SiteHeader";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { siteConfig } from "@/config/site";
-import { fetchBlogPost, formatBlogDate } from "@/lib/blog";
+import { getPost, formatBlogDate } from "@/lib/blog";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
-    const post = await fetchBlogPost(params.slug);
+    const post = await getPost({ data: { slug: params.slug } });
     if (!post) {
       throw notFound();
     }

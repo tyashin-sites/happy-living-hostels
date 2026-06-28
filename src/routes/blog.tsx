@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import { fetchBlogList, formatBlogDate } from "@/lib/blog";
+import { listPosts, formatBlogDate } from "@/lib/blog";
 
 type BlogSearch = { page?: number };
 
@@ -13,7 +13,7 @@ export const Route = createFileRoute("/blog")({
   },
   loaderDeps: ({ search }) => ({ page: search.page ?? 1 }),
   loader: async ({ deps }) => {
-    const data = await fetchBlogList({ page: deps.page });
+    const data = await listPosts({ data: { page: deps.page } });
     if (!data.active || data.posts.length === 0) {
       throw notFound();
     }
