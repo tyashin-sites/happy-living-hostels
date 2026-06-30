@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/sections/SiteHeader";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { listPosts, formatBlogDate } from "@/lib/blog";
+import { siteConfig, siteUrl } from "@/config/site";
 
 type BlogSearch = { page?: number };
 
@@ -34,11 +35,17 @@ export const Route = createFileRoute("/blog/")({
           "Stories, tips and updates from Happy Living — life at our premium girls PG in Roop Nagar, Delhi.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/blog" },
+      { property: "og:url", content: siteUrl("/blog") },
+      { property: "og:site_name", content: siteConfig.name },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Blog — Happy Living" },
+      {
+        name: "twitter:description",
+        content:
+          "Stories, tips and updates from Happy Living — life at our premium girls PG in Roop Nagar, Delhi.",
+      },
     ],
-    links: [{ rel: "canonical", href: "/blog" }],
+    links: [{ rel: "canonical", href: siteUrl("/blog") }],
   }),
   component: BlogIndex,
 });
