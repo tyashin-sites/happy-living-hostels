@@ -8,7 +8,7 @@ import { Location } from "@/components/sections/Location";
 import { CTA } from "@/components/sections/CTA";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import { siteConfig } from "@/config/site";
+import { siteConfig, siteUrl } from "@/config/site";
 
 export const pageMeta = {
   title: "Happy Living — Premium Girls PG in Roop Nagar, Delhi",
@@ -27,12 +27,13 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: pageMeta.title },
       { property: "og:description", content: pageMeta.description },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: siteUrl("/") },
+      { property: "og:site_name", content: siteConfig.name },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: pageMeta.title },
       { name: "twitter:description", content: pageMeta.description },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: siteUrl("/") }],
     scripts: [
       {
         type: "application/ld+json",

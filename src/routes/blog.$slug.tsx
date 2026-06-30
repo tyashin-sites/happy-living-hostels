@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import { siteConfig } from "@/config/site";
+import { siteConfig, siteUrl } from "@/config/site";
 import { getPost, formatBlogDate } from "@/lib/blog";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/blog/$slug")({
     const title = `${post.seo?.metaTitle || post.title} — Happy Living`;
     const description = post.seo?.metaDescription || post.excerpt || "";
     const image = post.seo?.ogImage || post.featuredImage;
-    const url = `/blog/${post.slug}`;
+    const url = siteUrl(`/blog/${post.slug}`);
 
     return {
       meta: [

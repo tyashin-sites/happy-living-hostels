@@ -1,5 +1,8 @@
 export const siteConfig = {
   name: "Happy Living",
+  // Canonical domain — drives absolute canonical / og:url. Change here if the
+  // customer's domain ever changes.
+  domain: "happylivinghostel.com",
   tagline: "Premium Girls PG",
   promise: "Comfort • Safety • Homely Stay",
   description:
@@ -23,6 +26,15 @@ export const siteConfig = {
     audience: "For Girls Only",
   },
 } as const;
+
+/** Absolute canonical URL for a path, e.g. siteUrl("/blog") →
+ *  https://www.happylivinghostel.com/blog. Used for canonical + og:url so
+ *  crawlers never index a relative/wrong host. */
+export function siteUrl(path = "/"): string {
+  const base = `https://www.${siteConfig.domain}`;
+  const p = path === "/" ? "" : `/${path.replace(/^\/+/, "")}`;
+  return `${base}${p}`;
+}
 
 export const whatsappLink = (() => {
   const num = siteConfig.whatsappNumber.replace(/\D/g, "");
