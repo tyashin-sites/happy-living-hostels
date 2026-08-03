@@ -85,6 +85,19 @@ export function SiteFooter() {
             {siteConfig.meta.audience} · {siteConfig.promise}
           </p>
         </div>
+        {/* Platform attribution (Tyashin addendum §3f) — footer's own muted cream,
+            gold only on hover, so it stays a subtle native line. */}
+        <p className="pb-5 text-center text-xs text-cream/50">
+          Made with ♥ by{' '}
+          <a
+            href="https://tyashin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-gold"
+          >
+            Tyashin
+          </a>
+        </p>
       </div>
     </footer>
   );
