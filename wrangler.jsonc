@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "site-shalu-website-mph1ikpi",
-  "logpush": true,
+  "tail_consumers": [{ "service": "aapastech-security-log-tail" }],
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
   // Built by `vite build` via @lovable.dev/vite-tanstack-config (TanStack
