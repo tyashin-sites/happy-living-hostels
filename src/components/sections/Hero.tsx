@@ -25,6 +25,11 @@ export function Hero() {
             Happy
             <br />
             Living.
+            {/* Part of the h1 on purpose: the name alone told Google nothing
+                about what or where this is. */}
+            <span className="mt-4 block font-sans text-sm font-semibold uppercase leading-normal tracking-[0.18em] text-forest/75 sm:text-base">
+              PG for girls and ladies in Roop Nagar, Delhi
+            </span>
           </h1>
 
           <p className="mt-5 max-w-xl font-display text-xl italic text-forest/80">
@@ -32,7 +37,7 @@ export function Hero() {
           </p>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-            A premium girls PG in the heart of Roop Nagar, Delhi — designed for
+            Happy Living is a premium girls PG in Roop Nagar, Delhi 110007, for
             students and working women who want a safe, warm and well-equipped
             second home.
           </p>

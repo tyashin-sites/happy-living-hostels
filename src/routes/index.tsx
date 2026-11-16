@@ -11,9 +11,13 @@ import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { siteConfig, siteUrl } from "@/config/site";
 
 export const pageMeta = {
-  title: "Happy Living — Premium Girls PG in Roop Nagar, Delhi",
+  // People search the name several ways ("happy living pg for ladies", "happy
+  // living girls pg", "happy living girls hostel") and by area ("pg in roop
+  // nagar"). Search Console had the site at 6-10 for its own name, so the title
+  // carries the name, both audiences and the area.
+  title: "Happy Living PG | Girls & Ladies PG in Roop Nagar, Delhi",
   description:
-    "Happy Living is a premium girls PG in Roop Nagar, Delhi offering AC rooms, homely food, 24×7 security, laundry, medical support and great connectivity. Chat on WhatsApp to book a visit.",
+    "Happy Living is a girls PG and ladies hostel at H. No. 1/20, Roop Nagar, Delhi 110007. AC rooms, homely food, 24×7 security, laundry and medical support, near the metro. Chat on WhatsApp to book a visit.",
   ogImage: "/og-home.jpg",
 };
 
@@ -23,7 +27,7 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: pageMeta.title },
       { name: "description", content: pageMeta.description },
-      { name: "keywords", content: "girls PG Delhi, PG Roop Nagar, girls hostel Delhi, premium PG for girls, ladies PG North Delhi, PG near metro Delhi" },
+      { name: "keywords", content: "Happy Living PG, Happy Living girls PG, Happy Living girls hostel, PG for ladies Roop Nagar, PG in Roop Nagar, girls PG Delhi, girls hostel Delhi, premium PG for girls, ladies PG North Delhi, PG near metro Delhi" },
       { property: "og:title", content: pageMeta.title },
       { property: "og:description", content: pageMeta.description },
       { property: "og:type", content: "website" },
@@ -39,17 +43,32 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "LodgingBusiness",
+          // Hostel is a LodgingBusiness, which is a LocalBusiness; both are
+          // listed so parsers that only look for LocalBusiness still match.
+          "@type": ["Hostel", "LocalBusiness"],
+          "@id": `${siteUrl("/")}#business`,
           name: siteConfig.name,
+          alternateName: [
+            "Happy Living PG",
+            "Happy Living Girls PG",
+            "Happy Living Girls Hostel",
+            "Happy Living PG for Ladies",
+            "Happy Living Women's PG",
+          ],
           description: siteConfig.description,
+          url: siteUrl("/"),
+          image: siteUrl(pageMeta.ogImage),
           telephone: siteConfig.whatsappNumber,
           address: {
             "@type": "PostalAddress",
             streetAddress: siteConfig.address.line1,
             addressLocality: "Delhi",
+            addressRegion: "Delhi",
             postalCode: "110007",
             addressCountry: "IN",
           },
+          areaServed: "Roop Nagar, Delhi",
+          audience: { "@type": "PeopleAudience", suggestedGender: "female" },
           hasMap: siteConfig.mapsUrl,
           amenityFeature: [
             "AC Rooms", "Fully Ventilated Rooms", "Park Facing Rooms",

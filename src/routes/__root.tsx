@@ -10,6 +10,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { getBlogMeta } from "@/lib/blog";
+import { siteConfig } from "@/config/site";
 
 // PERF: self-hosted fonts via @fontsource (bundled woff2, font-display:swap)
 // replace the render-blocking Google Fonts <link> that used to sit in this
@@ -98,14 +99,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      // Fallbacks for any route that sets no head of its own (404, errors).
+      { title: "Happy Living PG | Girls & Ladies PG in Roop Nagar, Delhi" },
+      { name: "description", content: siteConfig.description },
+      { property: "og:title", content: "Happy Living PG | Girls & Ladies PG in Roop Nagar, Delhi" },
+      { property: "og:description", content: siteConfig.description },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     // Fonts are self-hosted via @fontsource (imported at the top of this file),
     // so there is NO render-blocking Google Fonts <link> here anymore.
